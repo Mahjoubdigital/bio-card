@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Administración</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="admin-container">
+  <h1>🛠️ Panel de Administración</h1>
+  <p class="subtitle">Edita los datos de tu tarjeta bio</p>
+
+  <form id="adminForm">
+    <fieldset>
+      <legend>Datos personales</legend>
+      <label>Nombre completo<input type="text" id="f_name" required></label>
+      <label>Teléfono (con prefijo) <small>ej: +212600000000</small><input type="tel" id="f_phone" required></label>
+      <label>WhatsApp <small>solo números con prefijo</small><input type="text" id="f_whatsapp" required></label>
+      <label>Avatar (URL)<input type="url" id="f_avatar" placeholder="https://..."></label>
+      <label>Video YouTube ID <small>ej: 7G6hW-LqMlw</small><input type="text" id="f_videoId"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Enlaces sociales</legend>
+      <label>Sitio web<input type="url" id="f_web"></label>
+      <label>Instagram<input type="url" id="f_ig"></label>
+      <label>YouTube<input type="url" id="f_yt"></label>
+      <label>Facebook<input type="url" id="f_fb"></label>
+      <label>TikTok<input type="url" id="f_tt"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Imágenes del carrusel (URLs, una por línea)</legend>
+      <textarea id="f_images" rows="5" placeholder="https://...&#10;https://..."></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Imágenes de galería (URLs, una por línea)</legend>
+      <textarea id="f_gallery" rows="5" placeholder="https://...&#10;https://..."></textarea>
+    </fieldset>
+
+    <div class="actions">
+      <button type="button" class="btn-secondary" id="btnReset">Restablecer por defecto</button>
+      <button type="submit" class="btn-primary">Guardar cambios</button>
+      <a href="index.html" class="btn-preview">Ver página</a>
+    </div>
+  </form>
+
+  <div class="toast" id="toast"></div>
+</div>
+<script src="admin.js"></script>
+</body>
+</html>
