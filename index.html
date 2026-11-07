@@ -261,7 +261,7 @@ footer{color:#8a94a3;font-size:13px;display:flex;justify-content:space-between;a
 <div class="modal" id="chatModal" hidden role="dialog" aria-modal="true" aria-label="Asistente virtual">
   <div class="chat-card">
     <div class="chat-head">
-      <div class="chat-avatar">🤖</div>
+      <div class="chat-avatar"></div>
       <div class="grow">
         <strong id="chatTitle">Asistente</strong>
         <span class="chat-status"><i></i><span id="chatStatus">En línea</span></span>
@@ -318,12 +318,12 @@ footer{color:#8a94a3;font-size:13px;display:flex;justify-content:space-between;a
       <div class="actions">
         <button type="button" class="btn-a secondary" id="btnReset">Restablecer</button>
         <button type="submit" class="btn-a primary">💾 Guardar borrador</button>
-        <button type="button" class="btn-a export" id="btnExport">⬇ Descargar HTML actualizado</button>
+        <button type="button" class="btn-a export" id="btnExport"> Descargar HTML actualizado</button>
         <a href="#preview=1" class="btn-a preview">👁 Previsualizar</a>
       </div>
     </form>
     <div class="instructions">
-      <h3>📋 Cómo publicar los cambios</h3>
+      <h3> Cómo publicar los cambios</h3>
       <ol>
         <li>Edita y pulsa <strong>Guardar borrador</strong> → <strong>Previsualizar</strong></li>
         <li>Pulsa <strong>Descargar HTML actualizado</strong></li>
@@ -391,7 +391,7 @@ const ASSIST = {
     summaryTpl:"Resumen de tu solicitud:\n\n👤 Nombre: {name}\n🎨 Servicio: {service}\n📍 Zona: {location}\n📐 Tamaño: {size}\n📅 Urgencia: {timing}\n📞 Teléfono: {phone}\n\n¿Es correcto?",
     confirmQuick:["Sí, enviar por WhatsApp","Modificar datos"],
     sentTxt:"¡Hecho! ✅ He abierto WhatsApp con tu solicitud lista para enviar. Si no se abrió automáticamente, pulsa el botón de abajo.",
-    waBtn:"📲 Abrir WhatsApp de nuevo",
+    waBtn:" Abrir WhatsApp de nuevo",
     endQuick:["Empezar de nuevo","No, gracias"],byeTxt:"¡Gracias! Cualquier cosa, aquí estaré 🙌",
     modifyPrompt:"¿Qué dato quieres modificar?",fieldQuick:["Nombre","Servicio","Zona","Tamaño","Urgencia","Teléfono"],
     syn:[["nombre"],["servicio"],["zona","ciudad","barrio"],["tama","superficie","m2"],["urgen","plazo","cuando"],["telefon","whatsapp","movil"]],
@@ -425,7 +425,7 @@ const ASSIST = {
     greet2:"كيف يمكنني مساعدتك اليوم؟ اختر خياراً:",
     menuQuick:["طلب تقدير تكلفة","عرض الخدمات","التحدث عبر واتساب"],
     menuReask:"يمكنني مساعدتك. اختر خياراً أو أخبرني بما تحتاج:",
-    pickedSvc:"اختيار موفق! {service} من تخصصاتنا 😊",
+    pickedSvc:"اختيار موفق! {service} من تخصصاتنا ",
     helloName:"تشرفنا، {name} 😊",askName:"ما اسمك؟",
     askService:"ما الخدمة التي تحتاجها؟",svcQuick:["صباغة داخلية","صباغة خارجية","واجهة / عمارة","ديكور / تأثيرات","أخرى"],
     askLocation:"ممتاز. أين سيتم العمل؟",locQuick:["الدار البيضاء","المحمدية","الرباط","مراكش","منطقة أخرى"],otherPrompt:"اكتب منطقتك بالضبط من فضلك ✍️",
@@ -433,10 +433,10 @@ const ASSIST = {
     askTiming:"متى تحتاج التنفيذ؟",timingQuick:["في أقرب وقت","خلال شهر","خلال 1–3 أشهر","أستفسر فقط"],
     askPhone:"رائع! اترك لي هاتفك أو واتساب لإرسال تقدير التكلفة مجاناً 📞",
     badPhone:"يبدو أن هذا الرقم غير صالح. هل تكرره بالأرقام فقط؟",
-    summaryTpl:"ملخص طلبك:\n\n👤 الاسم: {name}\n🎨 الخدمة: {service}\n📍 المنطقة: {location}\n📐 المساحة: {size}\n📅 الاستعجال: {timing}\n📞 الهاتف: {phone}\n\nهل هذا صحيح؟",
+    summaryTpl:"ملخص طلبك:\n\n👤 الاسم: {name}\n🎨 الخدمة: {service}\n📍 المنطقة: {location}\n📐 المساحة: {size}\n📅 الاستعجال: {timing}\n الهاتف: {phone}\n\nهل هذا صحيح؟",
     confirmQuick:["نعم، إرسال عبر واتساب","تعديل البيانات"],
     sentTxt:"تم! ✅ فتحت واتساب بطلبك جاهزاً للإرسال. إذا لم يفتح تلقائياً، اضغط الزر بالأسفل.",
-    waBtn:"📲 فتح واتساب مجدداً",
+    waBtn:" فتح واتساب مجدداً",
     endQuick:["بدء من جديد","لا، شكراً"],byeTxt:"شكراً! سأبقى هنا عند الحاجة 🙌",
     modifyPrompt:"ما هو البيان الذي تريد تعديله؟",fieldQuick:["الاسم","الخدمة","المنطقة","المساحة","الاستعجال","الهاتف"],
     syn:[["اسم"],["خدم"],["منطق","مدين","حي"],["مساح","غرف"],["استعجال","وقت"],["هاتف","واتساب"]],
@@ -453,7 +453,7 @@ const SVC_KEYWORDS = [
 const YES_WORDS = ["si","sí","oui","yes","نعم","ok","vale","enviar","envoyer","correcto","confirmo"];
 
 /* ============================================================
-   UTILIDADES
+   UTILIDADES + SONIDO DE NOTIFICACIÓN
    ============================================================ */
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
@@ -463,6 +463,42 @@ let lang = localStorage.getItem("bioLang") || "es";
 const t = k => (I18N[lang] && I18N[lang][k]) ?? I18N.es[k] ?? "";
 const A = () => ASSIST[lang] || ASSIST.es;
 const ownerFirst = () => BIO_DATA.name.split(" ")[0];
+
+/* Generador de sonido "ding" usando Web Audio API */
+let audioCtx = null;
+let audioEnabled = false;
+
+function initAudio(){
+  if (!audioCtx) {
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      audioEnabled = true;
+    } catch(e) {
+      console.warn('Web Audio API no disponible');
+      audioEnabled = false;
+    }
+  }
+}
+
+function playNotificationSound(){
+  if (!audioEnabled || !audioCtx) return;
+  
+  const now = audioCtx.currentTime;
+  const oscillator = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+  
+  oscillator.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+  
+  oscillator.frequency.setValueAtTime(523.25, now); // C5
+  oscillator.frequency.exponentialRampToValueAtTime(1046.5, now + 0.1); // C6
+  
+  gainNode.gain.setValueAtTime(0.3, now);
+  gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+  
+  oscillator.start(now);
+  oscillator.stop(now + 0.3);
+}
 
 function toast(msg, color="var(--navy)"){
   const el = $("#toast"); el.textContent = msg; el.style.background = color;
@@ -488,7 +524,11 @@ async function botSay(texts, quick=[]){
   typing.className = "msg bot typing"; typing.innerHTML = "<i></i><i></i><i></i>";
   chatBody.appendChild(typing); scrollChat();
   await sleep(650); typing.remove();
-  for (const txt of texts){ addMsg("bot", txt); await sleep(320); }
+  for (const txt of texts){ 
+    addMsg("bot", txt); 
+    playNotificationSound(); // Sonido cuando el bot responde
+    await sleep(320); 
+  }
   renderQuick(quick);
 }
 function renderQuick(list){
@@ -528,6 +568,7 @@ function saveLead(){
 function startChat(){
   chat.step = "menu"; chat.data = {}; chat.returnTo = null;
   chatBody.innerHTML = ""; chatQuick.innerHTML = "";
+  initAudio(); // Inicializar audio en la primera interacción
   botSay([A().greet1.replace("{name}", ownerFirst()), A().greet2], A().menuQuick);
 }
 function askField(step){
