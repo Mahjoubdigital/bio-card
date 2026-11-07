@@ -7,150 +7,817 @@
 <meta name="description" content="Pintor y decorador profesional en Casablanca">
 <title>Zakaria Hamza — Pintor y decorador</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
-<link rel="stylesheet" href="styles.css">
+<style>
+:root{
+  --navy:#0e3a5f; --navy-dark:#0a2c48; --yellow:#f7b500; --yellow-soft:#ffc93c;
+  --bg:#f7f8fa; --text:#33475b; --muted:#5b7186; --green:#10b981;
+  --radius:10px; --shadow:0 6px 18px rgba(14,58,95,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;border:none;background:none}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;border-radius:6px}
+
+/* ============ BIO ============ */
+.lang-bar{display:flex;justify-content:flex-end;gap:6px;padding:14px 18px 0;max-width:1100px;margin:0 auto}
+.lang-btn{padding:2px;border-radius:4px;border:2px solid transparent;transition:.2s;line-height:0}
+.lang-btn svg{width:26px;height:18px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.lang-btn:hover{transform:scale(1.1)}
+.lang-btn[aria-pressed="true"]{border-color:var(--navy);background:#fff}
+.bio{max-width:680px;margin:0 auto;padding:24px 20px 40px}
+.profile{text-align:center;margin-bottom:26px}
+.avatar-ring{width:112px;height:112px;margin:0 auto 16px;border-radius:50%;background:#fff;padding:6px;box-shadow:var(--shadow)}
+.avatar-ring img,.avatar-fallback{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.avatar-fallback{display:flex;align-items:center;justify-content:center;background:var(--navy);color:var(--yellow);font-size:38px;font-weight:800}
+.profile h1{color:var(--navy);font-size:28px;font-weight:800}
+.tagline{color:var(--navy);font-weight:700;font-size:15px;margin-top:6px}
+.desc{color:var(--muted);font-size:15px;max-width:560px;margin:14px auto 0}
+.desc strong{color:var(--text)}
+.quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 14px}
+.qa{display:flex;align-items:center;justify-content:center;height:56px;background:var(--navy);border-radius:var(--radius);color:var(--yellow);transition:.2s;box-shadow:var(--shadow)}
+.qa svg{width:26px;height:26px}
+.qa:hover{background:var(--navy-dark);transform:translateY(-2px)}
+.acc{margin-bottom:14px}
+.acc-btn{width:100%;display:flex;align-items:center;gap:12px;padding:17px 18px;border-radius:var(--radius);background:var(--navy);color:#fff;font-weight:600;font-size:15.5px;text-align:start;transition:.2s;box-shadow:var(--shadow)}
+.acc-btn:hover{background:var(--navy-dark)}
+.acc-btn .ico{width:20px;height:20px;flex:none;color:#fff}
+.acc-btn .chev{width:18px;height:18px;margin-inline-start:auto;transition:transform .35s;color:var(--yellow-soft)}
+.acc-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.acc-panel{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.panel-card{background:#fff;border-radius:12px;padding:22px;margin-top:10px;box-shadow:var(--shadow)}
+.panel-card h3{color:var(--navy);font-size:15px;margin:14px 0 8px}
+.panel-card h3:first-child{margin-top:0}
+.panel-card p{font-size:14.5px;color:var(--muted)}
+.panel-card ul{list-style:none;margin-top:4px}
+.panel-card li{font-size:14.5px;padding:6px 0;padding-inline-start:26px;position:relative;color:var(--text)}
+.panel-card li::before{content:"";position:absolute;inset-inline-start:6px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--yellow)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{background:#eef3f8;color:var(--navy);font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;transition:.3s}
+.gallery img:hover{transform:scale(1.03)}
+.carousel{position:relative;border-radius:12px;overflow:hidden;margin:18px 0 24px;box-shadow:var(--shadow);aspect-ratio:16/9;background:#dde5ec}
+.car-track{display:flex;height:100%;transition:transform .5s ease}
+.car-track img{width:100%;height:100%;object-fit:cover;flex:none}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(10,44,72,.45);color:#fff;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:2}
+.car-btn:hover{background:rgba(10,44,72,.75)}
+.car-btn svg{width:20px;height:20px}
+.car-prev{inset-inline-start:10px}.car-next{inset-inline-end:10px}
+.car-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:2}
+.car-dots button{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.55);transition:.2s;padding:0}
+.car-dots button.on{background:var(--yellow);transform:scale(1.25)}
+.video{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:24px;box-shadow:var(--shadow);background:var(--navy)}
+.video .thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}
+.video::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.45));pointer-events:none}
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:68px;height:48px;background:#f00;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:.2s;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.play-btn:hover{transform:translate(-50%,-50%) scale(1.08);background:#ff0033}
+.play-btn svg{width:20px;height:20px;color:#fff}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video .vid-title{position:absolute;top:12px;inset-inline-start:14px;z-index:2;color:#fff;font-weight:700;font-size:14px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.links{display:grid;gap:14px;margin-bottom:14px}
+.link-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border-radius:var(--radius);background:var(--navy);color:#fff;font-weight:600;font-size:15px;transition:.2s;box-shadow:var(--shadow)}
+.link-btn svg{width:20px;height:20px;flex:none}
+.link-btn:hover{background:var(--navy-dark);transform:translateY(-2px)}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;padding:17px;border-radius:var(--radius);background:var(--yellow);color:var(--navy);font-weight:800;font-size:14.5px;letter-spacing:.4px;text-transform:uppercase;transition:.2s;box-shadow:0 6px 18px rgba(247,181,0,.35)}
+.cta svg{width:22px;height:22px}
+.cta:hover{filter:brightness(1.06);transform:translateY(-2px)}
+.divider{height:3px;border:none;background:var(--green);border-radius:3px;margin:30px 0 22px}
+footer{color:#8a94a3;font-size:13px;display:flex;justify-content:space-between;align-items:center}
+.admin-link{opacity:.3;font-size:16px;transition:.2s}
+.admin-link:hover{opacity:1}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ MODAL / ASISTENTE ============ */
+.modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,44,72,.55);backdrop-filter:blur(3px)}
+.modal[hidden]{display:none}
+.chat-card{width:min(440px,100%);height:min(640px,90vh);background:#fff;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.chat-head{display:flex;align-items:center;gap:10px;padding:13px 16px;background:var(--navy);color:#fff}
+.chat-avatar{width:40px;height:40px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-size:21px;flex:none}
+.chat-head .grow{flex:1;min-width:0}
+.chat-head strong{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-status{font-size:12px;color:#bcd3e6;display:flex;align-items:center;gap:5px}
+.chat-status i{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.chat-head button{color:#fff;padding:4px 9px;border-radius:8px;font-size:18px;line-height:1;transition:.15s}
+.chat-head button:hover{background:rgba(255,255,255,.15)}
+.chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#f2f5f9}
+.msg{max-width:84%;padding:10px 14px;border-radius:14px;font-size:14.5px;white-space:pre-line;animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}}
+.msg.bot{align-self:flex-start;background:#fff;color:var(--text);border-bottom-inline-start-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.msg.user{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-inline-end-radius:4px}
+.msg.typing{display:flex;gap:4px;padding:15px 16px}
+.msg.typing i{width:7px;height:7px;background:#9fb3c8;border-radius:50%;animation:blink 1s infinite}
+.msg.typing i:nth-child(2){animation-delay:.18s}.msg.typing i:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,80%,100%{opacity:.3}40%{opacity:1}}
+.wa-btn{display:inline-block;margin-top:10px;background:#25D366;color:#fff;padding:12px 18px;border-radius:10px;font-weight:700;font-size:14px;transition:.15s}
+.wa-btn:hover{background:#1ebe5b}
+/* Botones interactivos grandes */
+.chat-quick{display:flex;flex-wrap:wrap;gap:8px;padding:12px;background:#f2f5f9;border-top:1px solid #e3e9f0}
+.chat-quick:empty{display:none}
+.qchip{flex:1 1 46%;display:flex;align-items:center;justify-content:center;text-align:center;background:#fff;border:2px solid var(--navy);color:var(--navy);border-radius:12px;padding:12px 14px;font-size:14px;font-weight:700;transition:.15s;box-shadow:0 2px 6px rgba(14,58,95,.10)}
+.qchip:hover{background:var(--navy);color:#fff;transform:translateY(-1px)}
+.qchip:active{transform:scale(.97)}
+.chat-input{display:flex;gap:8px;padding:12px;background:#fff;border-top:1px solid #e3e9f0}
+.chat-input input{flex:1;border:2px solid #dfe6ee;border-radius:10px;padding:11px 13px;font:inherit;color:var(--text)}
+.chat-input input:focus{outline:none;border-color:var(--navy)}
+.chat-send{width:46px;height:46px;border-radius:10px;background:var(--navy);color:var(--yellow);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-send svg{width:20px;height:20px}
+
+/* ============ ADMIN ============ */
+.view{display:none}
+.view.active{display:block}
+.admin-wrap{padding:30px 16px;min-height:100vh}
+.admin-container{max-width:720px;margin:0 auto;background:#fff;border-radius:16px;padding:32px;box-shadow:0 10px 40px rgba(0,0,0,.08)}
+.admin-container h1{color:var(--navy);font-size:26px;margin-bottom:8px}
+.subtitle{color:var(--muted);margin-bottom:28px;font-size:15px}
+.admin-container fieldset{border:2px solid #e5e9f0;border-radius:12px;padding:20px;margin-bottom:24px}
+.admin-container legend{color:var(--navy);font-weight:700;padding:0 8px;font-size:15px}
+.admin-container label{display:block;margin:14px 0;font-size:14px;color:var(--text);font-weight:600}
+.admin-container label small{display:block;font-size:12px;color:#8a94a3;font-weight:400;margin-top:2px}
+.admin-container input,.admin-container textarea{width:100%;border:2px solid #dfe6ee;border-radius:8px;padding:11px 14px;font:inherit;color:var(--text);background:#fbfcfe;margin-top:6px;transition:.2s}
+.admin-container input:focus,.admin-container textarea:focus{outline:none;border-color:var(--navy);background:#fff}
+.admin-container textarea{resize:vertical;font-family:monospace;font-size:13px;line-height:1.5}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:8px}
+.btn-a{padding:13px 24px;border-radius:10px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block;text-align:center}
+.btn-a.primary{background:var(--navy);color:#fff;grid-column:span 2}
+.btn-a.primary:hover{background:var(--navy-dark)}
+.btn-a.secondary{background:#eef3f8;color:var(--muted)}
+.btn-a.secondary:hover{background:#e2eaf2}
+.btn-a.export{background:#10b981;color:#fff}
+.btn-a.export:hover{background:#0da473}
+.btn-a.preview{background:var(--yellow);color:var(--navy)}
+.btn-a.preview:hover{background:var(--yellow-soft)}
+.btn-a.view-bio{background:var(--navy);color:#fff}
+.instructions{margin-top:32px;padding:20px;background:#f7f8fa;border-radius:12px;border-left:4px solid var(--navy)}
+.instructions h3{color:var(--navy);font-size:16px;margin-bottom:12px}
+.instructions ol{padding-left:24px;font-size:14px;line-height:1.8;color:var(--text)}
+.instructions code{background:#e5e9f0;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px}
+.admin-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:24px}
+
+.toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,20px);z-index:60;background:var(--navy);color:#fff;padding:11px 20px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:.3s;box-shadow:var(--shadow);white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+@media (max-width:480px){.profile h1{font-size:24px}.quick-actions{gap:10px}.qchip{flex:1 1 100%}}
+@media(max-width:600px){.admin-container{padding:20px}.actions{grid-template-columns:1fr}.btn-a.primary{grid-column:span 1}}
+</style>
 </head>
 <body>
 
-<div class="lang-bar" role="group" aria-label="Idioma">
-  <button class="lang-btn" data-lang="ar" aria-label="العربية">
-    <svg viewBox="0 0 60 40"><rect width="60" height="40" fill="#C1272D"/><path d="M30 8 37.06 29.71 18.59 16.29 41.41 16.29 22.94 29.71 Z" fill="none" stroke="#006233" stroke-width="2"/></svg>
-  </button>
-  <button class="lang-btn" data-lang="fr" aria-label="Français">
-    <svg viewBox="0 0 60 40"><rect width="20" height="40" fill="#0055A4"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#EF4135"/></svg>
-  </button>
-  <button class="lang-btn" data-lang="es" aria-label="Español">
-    <svg viewBox="0 0 60 40"><rect width="60" height="40" fill="#AA151B"/><rect y="10" width="60" height="20" fill="#F1BF00"/></svg>
-  </button>
-</div>
-
-<main class="bio">
-  <header class="profile reveal">
-    <div class="avatar-ring"><img id="avatar" src="" alt="Avatar"></div>
-    <h1 id="appName"></h1>
-    <p class="tagline" data-i18n="tagline"></p>
-    <p class="desc" data-i18n-html="desc"></p>
-  </header>
-
-  <div class="quick-actions reveal">
-    <button class="qa" id="btnChat" data-aria="chat_aria">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
-    </button>
-    <a class="qa" id="btnCall" href="#" data-aria="call_aria">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-    </a>
-    <a class="qa" id="btnWa" href="#" target="_blank" rel="noopener" data-aria="wa_aria">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-    </a>
+<!-- ================= VISTA BIO ================= -->
+<div id="viewBio" class="view">
+  <div class="lang-bar" role="group" aria-label="Idioma">
+    <button class="lang-btn" data-lang="ar" aria-label="العربية"><svg viewBox="0 0 60 40"><rect width="60" height="40" fill="#C1272D"/><path d="M30 8 37.06 29.71 18.59 16.29 41.41 16.29 22.94 29.71 Z" fill="none" stroke="#006233" stroke-width="2"/></svg></button>
+    <button class="lang-btn" data-lang="fr" aria-label="Français"><svg viewBox="0 0 60 40"><rect width="20" height="40" fill="#0055A4"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#EF4135"/></svg></button>
+    <button class="lang-btn" data-lang="es" aria-label="Español"><svg viewBox="0 0 60 40"><rect width="60" height="40" fill="#AA151B"/><rect y="10" width="60" height="20" fill="#F1BF00"/></svg></button>
   </div>
 
-  <section class="acc reveal">
-    <button class="acc-btn" aria-expanded="false" aria-controls="panelAbout">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span data-i18n="about_title"></span>
-      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-    <div class="acc-panel" id="panelAbout">
-      <div class="panel-card">
-        <h3 data-i18n="about_intro"></h3>
-        <p data-i18n="about_p"></p>
-        <h3 data-i18n="services_title"></h3>
-        <ul id="servicesList"></ul>
-        <h3 data-i18n="commits_title"></h3>
-        <ul id="commitsList"></ul>
-      </div>
+  <main class="bio">
+    <header class="profile reveal">
+      <div class="avatar-ring"><img id="avatar" src="" alt="Avatar"></div>
+      <h1 id="appName"></h1>
+      <p class="tagline" data-i18n="tagline"></p>
+      <p class="desc" data-i18n-html="desc"></p>
+    </header>
+
+    <div class="quick-actions reveal">
+      <button class="qa" id="btnChat" data-aria="chat_aria">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
+      </button>
+      <a class="qa" id="btnCall" href="#" data-aria="call_aria"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      <a class="qa" id="btnWa" href="#" target="_blank" rel="noopener" data-aria="wa_aria"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
     </div>
-  </section>
 
-  <figure class="carousel reveal" id="carousel" dir="ltr">
-    <div class="car-track" id="carTrack"></div>
-    <button class="car-btn car-prev" id="carPrev" aria-label="Anterior">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="car-btn car-next" id="carNext" aria-label="Siguiente">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-    <div class="car-dots" id="carDots"></div>
-  </figure>
+    <section class="acc reveal">
+      <button class="acc-btn" aria-expanded="false" aria-controls="panelAbout">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span data-i18n="about_title"></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="acc-panel" id="panelAbout"><div class="panel-card">
+        <h3 data-i18n="about_intro"></h3><p data-i18n="about_p"></p>
+        <h3 data-i18n="services_title"></h3><ul id="servicesList"></ul>
+        <h3 data-i18n="commits_title"></h3><ul id="commitsList"></ul>
+      </div></div>
+    </section>
 
-  <section class="acc reveal">
-    <button class="acc-btn" aria-expanded="false" aria-controls="panelArea">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span data-i18n="area_title"></span>
-      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-    <div class="acc-panel" id="panelArea">
-      <div class="panel-card">
-        <p data-i18n="area_intro"></p>
-        <div class="chips" id="citiesChips"></div>
+    <figure class="carousel reveal" id="carousel" dir="ltr">
+      <div class="car-track" id="carTrack"></div>
+      <button class="car-btn car-prev" id="carPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="car-btn car-next" id="carNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <div class="car-dots" id="carDots"></div>
+    </figure>
+
+    <section class="acc reveal">
+      <button class="acc-btn" aria-expanded="false" aria-controls="panelArea">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span data-i18n="area_title"></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="acc-panel" id="panelArea"><div class="panel-card">
+        <p data-i18n="area_intro"></p><div class="chips" id="citiesChips"></div>
+      </div></div>
+    </section>
+
+    <section class="acc reveal">
+      <button class="acc-btn" aria-expanded="false" aria-controls="panelInsp">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span data-i18n="insp_title"></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="acc-panel" id="panelInsp"><div class="panel-card">
+        <p data-i18n="insp_text"></p><div class="gallery" id="gallery"></div>
+      </div></div>
+    </section>
+
+    <div class="video reveal" id="videoBox"></div>
+
+    <nav class="links reveal">
+      <a class="link-btn" id="linkWeb" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span data-i18n="link_web"></span></a>
+      <a class="link-btn" id="linkIg" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span data-i18n="link_ig"></span></a>
+      <a class="link-btn" id="linkYt" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.509A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.123 2.136c1.872.509 9.377.509 9.377.509s7.505 0 9.377-.509A3.02 3.02 0 0 0 23.5 17.81C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span data-i18n="link_yt"></span></a>
+      <a class="link-btn" id="linkFb" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg><span data-i18n="link_fb"></span></a>
+      <a class="link-btn" id="linkTt" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg><span data-i18n="link_tt"></span></a>
+    </nav>
+
+    <a class="cta reveal" id="ctaWa" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      <span data-i18n="cta"></span>
+    </a>
+
+    <hr class="divider">
+    <footer>
+      <span data-i18n="copyright"></span>
+      <a href="#admin" class="admin-link" title="Admin" aria-label="Administración">⚙️</a>
+    </footer>
+  </main>
+</div>
+
+<!-- ================= MODAL ASISTENTE ================= -->
+<div class="modal" id="chatModal" hidden role="dialog" aria-modal="true" aria-label="Asistente virtual">
+  <div class="chat-card">
+    <div class="chat-head">
+      <div class="chat-avatar">🤖</div>
+      <div class="grow">
+        <strong id="chatTitle">Asistente</strong>
+        <span class="chat-status"><i></i><span id="chatStatus">En línea</span></span>
       </div>
+      <button id="chatRestart" title="Reiniciar" aria-label="Reiniciar">↺</button>
+      <button id="chatClose" title="Cerrar" aria-label="Cerrar">×</button>
     </div>
-  </section>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-quick" id="chatQuick"></div>
+    <form class="chat-input" id="chatForm">
+      <input id="chatText" autocomplete="off" placeholder="Escribe tu respuesta…">
+      <button class="chat-send" type="submit" aria-label="Enviar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
 
-  <section class="acc reveal">
-    <button class="acc-btn" aria-expanded="false" aria-controls="panelInsp">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span data-i18n="insp_title"></span>
-      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-    <div class="acc-panel" id="panelInsp">
-      <div class="panel-card">
-        <p data-i18n="insp_text"></p>
-        <div class="gallery" id="gallery"></div>
+<!-- ================= VISTA ADMIN ================= -->
+<div id="viewAdmin" class="view admin-wrap">
+  <div class="admin-container">
+    <div class="admin-top">
+      <div>
+        <h1>🛠️ Panel de Administración</h1>
+        <p class="subtitle">Edita los datos de tu tarjeta bio</p>
       </div>
+      <a href="#" class="btn-a view-bio" id="backToBio">← Ver tarjeta</a>
     </div>
-  </section>
-
-  <div class="video reveal" id="videoBox"></div>
-
-  <nav class="links reveal">
-    <a class="link-btn" id="linkWeb" href="#" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      <span data-i18n="link_web"></span></a>
-    <a class="link-btn" id="linkIg" href="#" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      <span data-i18n="link_ig"></span></a>
-    <a class="link-btn" id="linkYt" href="#" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.509A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.123 2.136c1.872.509 9.377.509 9.377.509s7.505 0 9.377-.509A3.02 3.02 0 0 0 23.5 17.81C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      <span data-i18n="link_yt"></span></a>
-    <a class="link-btn" id="linkFb" href="#" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      <span data-i18n="link_fb"></span></a>
-    <a class="link-btn" id="linkTt" href="#" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-      <span data-i18n="link_tt"></span></a>
-  </nav>
-
-  <a class="cta reveal" id="ctaWa" href="#" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-    <span data-i18n="cta"></span>
-  </a>
-
-  <hr class="divider">
-  <footer>
-    <span data-i18n="copyright"></span>
-    <a href="admin.html" class="admin-link" title="Admin" aria-label="Administración">⚙️</a>
-  </footer>
-</main>
-
-<div class="modal" id="chatModal" hidden role="dialog" aria-modal="true">
-  <div class="modal-card">
-    <h2 data-i18n="modal_title"></h2>
-    <form id="chatForm">
-      <label for="fName" data-i18n="modal_name"></label>
-      <input id="fName" required maxlength="60">
-      <label for="fMsg" data-i18n="modal_msg"></label>
-      <textarea id="fMsg" rows="4" required maxlength="500"></textarea>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-ghost" id="modalCancel" data-i18n="modal_cancel"></button>
-        <button type="submit" class="btn btn-primary" data-i18n="modal_send"></button>
+    <form id="adminForm">
+      <fieldset>
+        <legend>Datos personales</legend>
+        <label>Nombre completo<input type="text" id="f_name" required></label>
+        <label>Teléfono (con prefijo) <small>ej: +212600000000</small><input type="tel" id="f_phone" required></label>
+        <label>WhatsApp <small>solo números con prefijo</small><input type="text" id="f_whatsapp" required></label>
+        <label>Avatar (URL)<input type="url" id="f_avatar" placeholder="https://..."></label>
+        <label>Video YouTube ID <small>ej: dQw4w9WgXcQ</small><input type="text" id="f_videoId"></label>
+      </fieldset>
+      <fieldset>
+        <legend>Enlaces sociales</legend>
+        <label>Sitio web<input type="url" id="f_web"></label>
+        <label>Instagram<input type="url" id="f_ig"></label>
+        <label>YouTube<input type="url" id="f_yt"></label>
+        <label>Facebook<input type="url" id="f_fb"></label>
+        <label>TikTok<input type="url" id="f_tt"></label>
+      </fieldset>
+      <fieldset>
+        <legend>Imágenes del carrusel (URLs, una por línea)</legend>
+        <textarea id="f_images" rows="5"></textarea>
+      </fieldset>
+      <fieldset>
+        <legend>Imágenes de galería (URLs, una por línea)</legend>
+        <textarea id="f_gallery" rows="5"></textarea>
+      </fieldset>
+      <div class="actions">
+        <button type="button" class="btn-a secondary" id="btnReset">Restablecer</button>
+        <button type="submit" class="btn-a primary">💾 Guardar borrador</button>
+        <button type="button" class="btn-a export" id="btnExport">⬇ Descargar HTML actualizado</button>
+        <a href="#preview=1" class="btn-a preview">👁 Previsualizar</a>
       </div>
     </form>
+    <div class="instructions">
+      <h3>📋 Cómo publicar los cambios</h3>
+      <ol>
+        <li>Edita y pulsa <strong>Guardar borrador</strong> → <strong>Previsualizar</strong></li>
+        <li>Pulsa <strong>Descargar HTML actualizado</strong></li>
+        <li>Sustituye <code>index.html</code> en GitHub → <code>git push</code></li>
+        <li>Vercel redeploya automáticamente ✅</li>
+      </ol>
+    </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script src="data.js"></script>
-<script src="app.js"></script>
+<script>
+/* ============================================================
+   DATOS (se regeneran al exportar desde el admin)
+   ============================================================ */
+let BIO_DATA = {
+  name: "Zakaria Hamza",
+  phone: "+212600000000",
+  whatsapp: "212600000000",
+  avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+  videoId: "",
+  links: { web:"https://www.ejemplo.com", instagram:"https://instagram.com/tu_usuario", youtube:"https://youtube.com/@tu_canal", facebook:"https://facebook.com/tu_pagina", tiktok:"https://tiktok.com/@tu_usuario" },
+  images: [
+    "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=70",
+    "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=70",
+    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=70",
+    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=70"
+  ],
+  gallery: [
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=70",
+    "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=600&q=70",
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=70",
+    "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=600&q=70"
+  ]
+};
+const DEFAULT_DATA = JSON.parse(JSON.stringify(BIO_DATA));
+
+/* ============================================================
+   TRADUCCIONES WEB
+   ============================================================ */
+const I18N = {
+  es:{tagline:"Pintor y decorador profesional en Casablanca.",desc:"Pintor y decorador profesional en Casablanca: pintura de interiores, exteriores y fachadas. Calidad, profesionalidad y acabados impecables. <strong>Presupuestos gratuitos y entrega puntual.</strong>",about_title:"Acerca de la pintura de Zakaria",about_intro:"Tu especialista en pintura interior, exterior y decoración en Casablanca.",about_p:"Realizamos todo tipo de trabajos de pintura y decoración para particulares, comunidades y profesionales. Damos nueva vida a tus espacios con un trabajo cuidado y acabados de calidad.",services_title:"Nuestros servicios:",services:["Pintura de interiores","Pintura de exteriores","Pintura de fachadas y edificios","Pintura de pisos y casas","Pintura de techos","Pintura y renovación de puertas","Pintura de escaleras y zonas comunes","Pintura y decoración de cocinas","Pintura y renovación de baños","Decoración de interiores","Reformas y acabados"],commits_title:"Nuestros compromisos:",commits:["Trabajo cuidado y de calidad","Respeto de los plazos","Acabados profesionales","Intervención en casas, pisos y edificios","Asesoramiento personalizado","Presupuesto gratuito y sin compromiso"],area_title:"Área de intervención",area_intro:"Intervenimos en Casablanca y alrededores, así como en varias ciudades del reino.",cities:["Casablanca","Sbata","Barrio California","Dar Bouazza","Mohammedia","Sidi Rahal Chatai","Ain Diab","Aïn Chock","Bouskoura","Bourgogne","Maârif","Marrakech","Rabat","Tanger","Tetuán","Agadir"],insp_title:"Inspiración",insp_text:"Una selección de ideas y colores para tu próximo proyecto.",link_web:"Sitio web",link_ig:"Instagram",link_yt:"YouTube",link_fb:"Facebook",link_tt:"TikTok",cta:"Presupuesto gratuito por WhatsApp",chat_aria:"Hablar con el asistente",call_aria:"Llamar por teléfono",wa_aria:"Escribir por WhatsApp",copyright:"Copyright © "},
+  fr:{tagline:"Peintre professionnel & décorateur à Casablanca.",desc:"Peintre professionnel et décorateur à Casablanca : peinture intérieure, extérieure et façades. Qualité, professionnalisme et finitions soignées. <strong>Devis gratuit et respect des délais.</strong>",about_title:"À propos de Zakaria Peinture",about_intro:"Votre spécialiste en peinture intérieure, extérieure et décoration à Casablanca.",about_p:"Nous réalisons tous types de travaux de peinture et de décoration pour les particuliers, les immeubles et les professionnels. Nous donnons une nouvelle vie à vos espaces grâce à un travail soigné et des finitions de qualité.",services_title:"Nos prestations :",services:["Peinture intérieure","Peinture extérieure","Peinture de façades et d'immeubles","Peinture des appartements et des maisons","Peinture des plafonds","Peinture et rénovation des portes","Peinture des cages d'escalier et parties communes","Peinture et décoration des cuisines","Peinture et rénovation des salles de bain","Décoration intérieure","Travaux de rénovation et finitions"],commits_title:"Nos engagements :",commits:["Travail soigné et de qualité","Respect des délais","Finitions professionnelles","Intervention sur maisons, appartements et immeubles","Conseils personnalisés","Devis gratuit et sans engagement"],area_title:"Zone d'intervention",area_intro:"Nous intervenons à Casablanca et ses environs, ainsi que dans plusieurs villes du Royaume.",cities:["Casablanca","Sbata","Quartier Californie","Dar Bouazza","Mohammédia","Sidi Rahal Chatai","Ain Diab","Aïn Chock","Bouskoura","Bourgogne","Maârif","Marrakech","Rabat","Tanger","Tétouan","Agadir"],insp_title:"Inspiration",insp_text:"Une sélection d'idées et de couleurs pour votre prochain projet.",link_web:"Site web",link_ig:"Instagram",link_yt:"YouTube",link_fb:"Facebook",link_tt:"TikTok",cta:"Devis gratuit sur WhatsApp",chat_aria:"Parler à l'assistant",call_aria:"Appeler",wa_aria:"Écrire sur WhatsApp",copyright:"Copyright © "},
+  ar:{tagline:"صباغ وديكوراتور محترف في الدار البيضاء.",desc:"صباغ وديكوراتور محترف في الدار البيضاء: صباغة الداخلية والخارجية والواجهات. جودة واحترافية وتشطيبات لا تشوبها شائبة. <strong>تقدير التكلفة مجاني وتسليم في الموعد المحدد.</strong>",about_title:"حول صباغة زكريا",about_intro:"متخصصك في الصباغة الداخلية والخارجية والديكور في الدار البيضاء.",about_p:"ننفذ جميع أنواع أعمال الصباغة والديكور للأفراد والعمائر والمهنيين. نمنح مساحاتك حياة جديدة بعمل متقن وتشطيبات عالية الجودة.",services_title:"خدماتنا:",services:["الصباغة الداخلية","الصباغة الخارجية","صباغة الواجهات والعمائر","صباغة الشقق والمنازل","صباغة الأسقف","صباغة وتجديد الأبواب","صباغة سلالم العمائر والأجزاء المشتركة","صباغة وديكور المطابخ","صباغة وتجديد الحمامات","الديكور الداخلي","أشغال التجديد والتشطيبات"],commits_title:"التزاماتنا:",commits:["عمل متقن وعالي الجودة","احترام المواعيد","تشطيبات احترافية","التدخل في المنازل والشقق والعمائر","نصائح مخصصة","تقدير تكلفة مجاني وبدون التزام"],area_title:"مجالات التدخل",area_intro:"نتدخل في الدار البيضاء وضواحيها وفي عدة مدن بالمملكة.",cities:["الدار البيضاء","سباتة","حي كاليفورنيا","دار بوعزة","المحمدية","سيدي رحال الشطاي","عين الذياب","عين الشق","بوسكورة","بورغون","المعاريف","مراكش","الرباط","طنجة","تطوان","أكادير"],insp_title:"إلهام",insp_text:"مختارات من الأفكار والألوان لمشروعك المقبل.",link_web:"موقع الويب",link_ig:"إنستغرام",link_yt:"يوتيوب",link_fb:"فيسبوك",link_tt:"تيك توك",cta:"تقدير تكلفة مجاني عبر واتساب",chat_aria:"التحدث مع المساعد",call_aria:"اتصال هاتفي",wa_aria:"مراسلة عبر واتساب",copyright:"حقوق النشر © "}
+};
+
+/* ============================================================
+   CEREBRO DEL ASISTENTE (ES/FR/AR) — 100% BOTONES + WHATSAPP
+   ============================================================ */
+const ASSIST = {
+  es:{title:"Asistente de {name}",online:"En línea",ph:"Escribe tu respuesta…",restart:"Reiniciar",
+    greet1:"¡Hola! 👋 Soy el asistente virtual de {name}.",
+    greet2:"¿En qué puedo ayudarte hoy? Elige una opción:",
+    menuQuick:["Solicitar presupuesto","Ver servicios","Hablar por WhatsApp"],
+    menuReask:"Puedo ayudarte con eso. Elige una opción o cuéntame qué necesitas:",
+    pickedSvc:"¡Buena elección! {service} es una de nuestras especialidades 😊",
+    helloName:"Encantado, {name} 😊",askName:"¿Cuál es tu nombre?",
+    askService:"¿Qué servicio necesitas?",svcQuick:["Pintura interior","Pintura exterior","Fachada / edificio","Decoración / efectos","Otro"],
+    askLocation:"Perfecto. ¿Dónde se haría el trabajo?",locQuick:["Casablanca","Mohammedia","Rabat","Marrakech","Otra zona"],otherPrompt:"Dime tu zona exacta, por favor ✍️",
+    askSize:"¿Me das una idea del tamaño?",sizeQuick:["Menos de 50 m²","50–100 m²","100–200 m²","Más de 200 m²","No lo sé"],
+    askTiming:"¿Para cuándo lo necesitas?",timingQuick:["Cuanto antes","En 1 mes","En 1–3 meses","Solo consulto"],
+    askPhone:"¡Genial! Déjame tu teléfono o WhatsApp para enviarte el presupuesto gratuito 📞",
+    badPhone:"Mmm, ese teléfono no parece válido. ¿Me lo repites solo con números? (ej: +212 6 00 00 00 00)",
+    summaryTpl:"Resumen de tu solicitud:\n\n👤 Nombre: {name}\n🎨 Servicio: {service}\n📍 Zona: {location}\n📐 Tamaño: {size}\n📅 Urgencia: {timing}\n📞 Teléfono: {phone}\n\n¿Es correcto?",
+    confirmQuick:["Sí, enviar por WhatsApp","Modificar datos"],
+    sentTxt:"¡Hecho! ✅ He abierto WhatsApp con tu solicitud lista para enviar. Si no se abrió automáticamente, pulsa el botón de abajo.",
+    waBtn:"📲 Abrir WhatsApp de nuevo",
+    endQuick:["Empezar de nuevo","No, gracias"],byeTxt:"¡Gracias! Cualquier cosa, aquí estaré 🙌",
+    modifyPrompt:"¿Qué dato quieres modificar?",fieldQuick:["Nombre","Servicio","Zona","Tamaño","Urgencia","Teléfono"],
+    syn:[["nombre"],["servicio"],["zona","ciudad","barrio"],["tama","superficie","m2"],["urgen","plazo","cuando"],["telefon","whatsapp","movil"]],
+    /* Mensaje de WhatsApp: SOLO texto plano compatible (negritas con *) */
+    waTpl:"*NUEVA SOLICITUD DE PRESUPUESTO*\n--------------------------\n*Nombre:* {name}\n*Servicio:* {service}\n*Zona:* {location}\n*Tamaño:* {size}\n*Urgencia:* {timing}\n*Telefono:* {phone}\n--------------------------\n(Enviado desde la web de {owner})",
+    waGeneric:"Hola {owner}, vengo de tu pagina web y quiero mas informacion."},
+  fr:{title:"Assistant de {name}",online:"En ligne",ph:"Écrivez votre réponse…",restart:"Réinitialiser",
+    greet1:"Bonjour ! 👋 Je suis l'assistant virtuel de {name}.",
+    greet2:"Comment puis-je vous aider aujourd'hui ? Choisissez une option :",
+    menuQuick:["Demander un devis","Voir les services","Parler sur WhatsApp"],
+    menuReask:"Je peux vous aider. Choisissez une option ou dites-moi ce dont vous avez besoin :",
+    pickedSvc:"Bon choix ! {service} est l'une de nos spécialités 😊",
+    helloName:"Enchanté, {name} 😊",askName:"Quel est votre nom ?",
+    askService:"De quel service avez-vous besoin ?",svcQuick:["Peinture intérieure","Peinture extérieure","Façade / immeuble","Décoration / effets","Autre"],
+    askLocation:"Parfait. Où se fera le travail ?",locQuick:["Casablanca","Mohammédia","Rabat","Marrakech","Autre zone"],otherPrompt:"Dites-moi votre zone exacte, s'il vous plaît ✍️",
+    askSize:"Une idée de la surface ?",sizeQuick:["Moins de 50 m²","50–100 m²","100–200 m²","Plus de 200 m²","Je ne sais pas"],
+    askTiming:"Pour quand en avez-vous besoin ?",timingQuick:["Dès que possible","Dans 1 mois","Dans 1–3 mois","Je me renseigne"],
+    askPhone:"Parfait ! Laissez-moi votre téléphone ou WhatsApp pour recevoir le devis gratuit 📞",
+    badPhone:"Hmm, ce numéro ne semble pas valide. Pouvez-vous le répéter avec des chiffres uniquement ?",
+    summaryTpl:"Résumé de votre demande :\n\n👤 Nom : {name}\n🎨 Service : {service}\n📍 Zone : {location}\n📐 Surface : {size}\n📅 Urgence : {timing}\n📞 Téléphone : {phone}\n\nEst-ce correct ?",
+    confirmQuick:["Oui, envoyer sur WhatsApp","Modifier"],
+    sentTxt:"C'est fait ! ✅ J'ai ouvert WhatsApp avec votre demande prête à envoyer. Si rien ne s'est ouvert, appuyez sur le bouton ci-dessous.",
+    waBtn:"📲 Rouvrir WhatsApp",
+    endQuick:["Recommencer","Non, merci"],byeTxt:"Merci ! Je reste là si besoin 🙌",
+    modifyPrompt:"Quelle information voulez-vous modifier ?",fieldQuick:["Nom","Service","Zone","Surface","Urgence","Téléphone"],
+    syn:[["nom"],["service"],["zone","ville"],["surface","taille","m2"],["urgence","quand"],["telephone","whatsapp","portable"]],
+    waTpl:"*NOUVELLE DEMANDE DE DEVIS*\n--------------------------\n*Nom :* {name}\n*Service :* {service}\n*Zone :* {location}\n*Surface :* {size}\n*Urgence :* {timing}\n*Telephone :* {phone}\n--------------------------\n(Envoye depuis le site de {owner})",
+    waGeneric:"Bonjour {owner}, je viens de votre site web et j'aimerais plus d'informations."},
+  ar:{title:"مساعد {name}",online:"متصل",ph:"اكتب إجابتك…",restart:"إعادة",
+    greet1:"مرحباً! 👋 أنا المساعد الافتراضي لـ{name}.",
+    greet2:"كيف يمكنني مساعدتك اليوم؟ اختر خياراً:",
+    menuQuick:["طلب تقدير تكلفة","عرض الخدمات","التحدث عبر واتساب"],
+    menuReask:"يمكنني مساعدتك. اختر خياراً أو أخبرني بما تحتاج:",
+    pickedSvc:"اختيار موفق! {service} من تخصصاتنا 😊",
+    helloName:"تشرفنا، {name} 😊",askName:"ما اسمك؟",
+    askService:"ما الخدمة التي تحتاجها؟",svcQuick:["صباغة داخلية","صباغة خارجية","واجهة / عمارة","ديكور / تأثيرات","أخرى"],
+    askLocation:"ممتاز. أين سيتم العمل؟",locQuick:["الدار البيضاء","المحمدية","الرباط","مراكش","منطقة أخرى"],otherPrompt:"اكتب منطقتك بالضبط من فضلك ✍️",
+    askSize:"هل تعطيني فكرة عن المساحة؟",sizeQuick:["أقل من 50 م²","50–100 م²","100–200 م²","أكثر من 200 م²","لا أعرف"],
+    askTiming:"متى تحتاج التنفيذ؟",timingQuick:["في أقرب وقت","خلال شهر","خلال 1–3 أشهر","أستفسر فقط"],
+    askPhone:"رائع! اترك لي هاتفك أو واتساب لإرسال تقدير التكلفة مجاناً 📞",
+    badPhone:"يبدو أن هذا الرقم غير صالح. هل تكرره بالأرقام فقط؟",
+    summaryTpl:"ملخص طلبك:\n\n👤 الاسم: {name}\n🎨 الخدمة: {service}\n📍 المنطقة: {location}\n📐 المساحة: {size}\n📅 الاستعجال: {timing}\n📞 الهاتف: {phone}\n\nهل هذا صحيح؟",
+    confirmQuick:["نعم، إرسال عبر واتساب","تعديل البيانات"],
+    sentTxt:"تم! ✅ فتحت واتساب بطلبك جاهزاً للإرسال. إذا لم يفتح تلقائياً، اضغط الزر بالأسفل.",
+    waBtn:"📲 فتح واتساب مجدداً",
+    endQuick:["بدء من جديد","لا، شكراً"],byeTxt:"شكراً! سأبقى هنا عند الحاجة 🙌",
+    modifyPrompt:"ما هو البيان الذي تريد تعديله؟",fieldQuick:["الاسم","الخدمة","المنطقة","المساحة","الاستعجال","الهاتف"],
+    syn:[["اسم"],["خدم"],["منطق","مدين","حي"],["مساح","غرف"],["استعجال","وقت"],["هاتف","واتساب"]],
+    waTpl:"*طلب تقدير تكلفة جديد*\n--------------------------\n*الاسم:* {name}\n*الخدمة:* {service}\n*المنطقة:* {location}\n*المساحة:* {size}\n*الاستعجال:* {timing}\n*الهاتف:* {phone}\n--------------------------\n(مرسل من موقع {owner})",
+    waGeneric:"مرحباً {owner}, جئت من موقعك واريد مزيداً من المعلومات."}
+};
+/* Palabras clave para detectar servicio escrito libremente */
+const SVC_KEYWORDS = [
+  {es:["interior","interna","habitaci","cuarto","salon","cocina","baño","techo","puerta","escalera","piso","casa","apartamento"],fr:["interieur","chambre","salon","cuisine","salle de bain","plafond","porte","escalier","appartement","maison"],ar:["داخل","غرف","صالون","مطبخ","حمام","سقف","باب","سلم","شقة","منزل"]},
+  {es:["exterior","terraza","balcon","jardin","muro"],fr:["exterieur","terrasse","balcon","jardin","mur"],ar:["خارج","شرف","حديق","جدار"]},
+  {es:["fachada","edificio","inmueble"],fr:["facade","batiment","immeuble"],ar:["واجه","عمار","مبنى"]},
+  {es:["decor","estetic","mural","efecto","textura"],fr:["decor","mural","effet","texture"],ar:["ديكور","زخرف","نقش"]}
+];
+const YES_WORDS = ["si","sí","oui","yes","نعم","ok","vale","enviar","envoyer","correcto","confirmo"];
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const normalize = s => (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+let lang = localStorage.getItem("bioLang") || "es";
+const t = k => (I18N[lang] && I18N[lang][k]) ?? I18N.es[k] ?? "";
+const A = () => ASSIST[lang] || ASSIST.es;
+const ownerFirst = () => BIO_DATA.name.split(" ")[0];
+
+function toast(msg, color="var(--navy)"){
+  const el = $("#toast"); el.textContent = msg; el.style.background = color;
+  el.classList.add("show"); clearTimeout(toast._t);
+  toast._t = setTimeout(() => el.classList.remove("show"), 2800);
+}
+
+/* ============================================================
+   MOTOR DEL ASISTENTE
+   ============================================================ */
+const chat = { step:null, data:{}, returnTo:null };
+const chatBody = $("#chatBody"), chatQuick = $("#chatQuick");
+
+function scrollChat(){ chatBody.scrollTop = chatBody.scrollHeight; }
+function addMsg(who, text, html=false){
+  const d = document.createElement("div");
+  d.className = "msg " + who;
+  if (html) d.innerHTML = text; else d.textContent = text;
+  chatBody.appendChild(d); scrollChat(); return d;
+}
+async function botSay(texts, quick=[]){
+  const typing = document.createElement("div");
+  typing.className = "msg bot typing"; typing.innerHTML = "<i></i><i></i><i></i>";
+  chatBody.appendChild(typing); scrollChat();
+  await sleep(650); typing.remove();
+  for (const txt of texts){ addMsg("bot", txt); await sleep(320); }
+  renderQuick(quick);
+}
+function renderQuick(list){
+  chatQuick.innerHTML = "";
+  (list||[]).forEach(label => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "qchip"; b.textContent = label;
+    b.onclick = () => userSend(label);
+    chatQuick.appendChild(b);
+  });
+}
+function userSend(text){
+  text = (text||"").trim(); if (!text) return;
+  addMsg("user", text); chatQuick.innerHTML = ""; process(text);
+}
+function fillSummary(){
+  const d = chat.data, f = k => d[k] || "—";
+  return A().summaryTpl.replace("{name}",f("name")).replace("{service}",f("service"))
+    .replace("{location}",f("location")).replace("{size}",f("size"))
+    .replace("{timing}",f("timing")).replace("{phone}",f("phone"));
+}
+/* Mensaje WhatsApp en TEXTO PLANO compatible (sin emojis raros) */
+function waText(){
+  const d = chat.data, f = k => d[k] || "-";
+  return A().waTpl.replace("{name}",f("name")).replace("{service}",f("service"))
+    .replace("{location}",f("location")).replace("{size}",f("size"))
+    .replace("{timing}",f("timing")).replace("{phone}",f("phone"))
+    .replace("{owner}", BIO_DATA.name);
+}
+function waLink(){ return `https://wa.me/${BIO_DATA.whatsapp}?text=${encodeURIComponent(waText())}`; }
+function waGenericLink(){ return `https://wa.me/${BIO_DATA.whatsapp}?text=${encodeURIComponent(A().waGeneric.replace("{owner}", BIO_DATA.name))}`; }
+function saveLead(){
+  const leads = JSON.parse(localStorage.getItem("bioLeads") || "[]");
+  leads.push({ ts:new Date().toISOString(), lang, ...chat.data });
+  localStorage.setItem("bioLeads", JSON.stringify(leads));
+}
+function startChat(){
+  chat.step = "menu"; chat.data = {}; chat.returnTo = null;
+  chatBody.innerHTML = ""; chatQuick.innerHTML = "";
+  botSay([A().greet1.replace("{name}", ownerFirst()), A().greet2], A().menuQuick);
+}
+function askField(step){
+  const a = A();
+  switch(step){
+    case "name": botSay([a.askName]); break;
+    case "service": botSay([a.askService], a.svcQuick); break;
+    case "location": botSay([a.askLocation], a.locQuick); break;
+    case "size": botSay([a.askSize], a.sizeQuick); break;
+    case "timing": botSay([a.askTiming], a.timingQuick); break;
+    case "phone": botSay([a.askPhone]); break;
+  }
+}
+function detectService(raw){
+  const norm = normalize(raw), a = A();
+  const idxLabel = a.svcQuick.findIndex(l => norm === normalize(l));
+  if (idxLabel > -1 && idxLabel < 4) return { matched:true, label:a.svcQuick[idxLabel] };
+  const kw = (SVC_KEYWORDS[lang] || SVC_KEYWORDS.es);
+  for (let i = 0; i < SVC_KEYWORDS.length; i++){
+    if ((kw[i]||[]).some(k => norm.includes(normalize(k)))) return { matched:true, label:a.svcQuick[i] };
+  }
+  return { matched:false, label:raw };
+}
+function detectField(norm){
+  const syn = A().syn;
+  for (let i = 0; i < syn.length; i++){
+    if (syn[i].some(k => norm.includes(normalize(k))))
+      return ["name","service","location","size","timing","phone"][i];
+  }
+  const idx = A().fieldQuick.findIndex(l => norm === normalize(l));
+  if (idx > -1) return ["name","service","location","size","timing","phone"][idx];
+  return null;
+}
+function isYes(norm){ return YES_WORDS.some(w => norm === w || norm.startsWith(w + " ")); }
+
+function process(raw){
+  const a = A(), norm = normalize(raw), d = chat.data;
+  const back = () => {
+    if (chat.returnTo){ chat.returnTo = null; chat.step = "summary"; botSay([fillSummary()], a.confirmQuick); return true; }
+    return false;
+  };
+  switch(chat.step){
+    case "menu": {
+      if (norm === normalize(a.menuQuick[0])){ chat.step = "name"; botSay([a.askName]); break; }
+      if (norm === normalize(a.menuQuick[1])){
+        botSay([t("services_title") + "\n• " + t("services").join("\n• ")], [a.menuQuick[0], a.menuQuick[2]]); break;
+      }
+      if (norm === normalize(a.menuQuick[2])){
+        window.open(waGenericLink(), "_blank");
+        botSay([a.byeTxt]); chat.step = "done"; break;
+      }
+      const res = detectService(raw);
+      if (res.matched){
+        d.service = res.label; chat.step = "name";
+        botSay([a.pickedSvc.replace("{service}", res.label), a.askName]); break;
+      }
+      botSay([a.menuReask], a.menuQuick); break;
+    }
+    case "name":
+      d.name = raw;
+      if (back()) break;
+      if (d.service){ chat.step = "location"; botSay([a.helloName.replace("{name}", raw), a.askLocation], a.locQuick); }
+      else { chat.step = "service"; botSay([a.helloName.replace("{name}", raw), a.askService], a.svcQuick); }
+      break;
+    case "service":
+      d.service = detectService(raw).label;
+      if (back()) break;
+      chat.step = "location"; botSay([a.askLocation], a.locQuick); break;
+    case "location":
+      if (norm === normalize(a.locQuick[4])){ botSay([a.otherPrompt]); break; }
+      d.location = raw;
+      if (back()) break;
+      chat.step = "size"; botSay([a.askSize], a.sizeQuick); break;
+    case "size":
+      d.size = raw;
+      if (back()) break;
+      chat.step = "timing"; botSay([a.askTiming], a.timingQuick); break;
+    case "timing":
+      d.timing = raw;
+      if (back()) break;
+      chat.step = "phone"; botSay([a.askPhone]); break;
+    case "phone":
+      if (!/^[+]?[\d\s()-]{8,}$/.test(raw)){ botSay([a.badPhone]); break; }
+      d.phone = raw;
+      if (back()) break;
+      chat.step = "summary"; botSay([fillSummary()], a.confirmQuick); break;
+    case "summary":
+      if (isYes(norm) || norm === normalize(a.confirmQuick[0])){
+        saveLead();
+        window.open(waLink(), "_blank");   /* se envía por WhatsApp al confirmar */
+        chat.step = "sent";
+        botSay([a.sentTxt]).then(() => {
+          addMsg("bot", `<a class="wa-btn" href="${waLink()}" target="_blank" rel="noopener">${a.waBtn}</a>`, true);
+          renderQuick(a.endQuick);
+        });
+      } else if (norm === normalize(a.confirmQuick[1]) || norm.includes("modif")){
+        chat.step = "modify"; botSay([a.modifyPrompt], a.fieldQuick);
+      } else { botSay([fillSummary()], a.confirmQuick); }
+      break;
+    case "modify": {
+      const f = detectField(norm);
+      if (f){ chat.returnTo = "summary"; chat.step = f; askField(f); }
+      else botSay([a.modifyPrompt], a.fieldQuick);
+      break;
+    }
+    case "sent":
+      if (norm === normalize(a.endQuick[0]) || ["nuevo","recommenc","جديد"].some(k => norm.includes(k))) startChat();
+      else { botSay([a.byeTxt]); chat.step = "done"; }
+      break;
+    default: startChat();
+  }
+}
+
+/* Eventos del chat */
+$("#btnChat").addEventListener("click", () => {
+  $("#chatModal").hidden = false;
+  if (!chat.step) startChat();
+  scrollChat(); $("#chatText").focus();
+});
+$("#chatClose").addEventListener("click", () => $("#chatModal").hidden = true);
+$("#chatRestart").addEventListener("click", startChat);
+$("#chatModal").addEventListener("click", e => { if (e.target === $("#chatModal")) $("#chatModal").hidden = true; });
+document.addEventListener("keydown", e => { if (e.key === "Escape") $("#chatModal").hidden = true; });
+$("#chatForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const inp = $("#chatText"); userSend(inp.value); inp.value = "";
+});
+function updateChatChrome(){
+  const a = A();
+  $("#chatTitle").textContent = a.title.replace("{name}", ownerFirst());
+  $("#chatStatus").textContent = a.online;
+  $("#chatText").placeholder = a.ph;
+  $("#chatRestart").title = a.restart;
+}
+
+/* ============================================================
+   WEB: idiomas, acordeones, carrusel, video, enlaces, admin
+   ============================================================ */
+function applyLang(l){
+  lang = l; localStorage.setItem("bioLang", l);
+  document.documentElement.lang = l;
+  document.documentElement.dir = (l === "ar") ? "rtl" : "ltr";
+  $$("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
+  $$("[data-i18n-html]").forEach(el => el.innerHTML = t(el.dataset.i18nHtml));
+  $$("[data-aria]").forEach(el => el.setAttribute("aria-label", t(el.dataset.aria)));
+  $("#servicesList").innerHTML = t("services").map(x => `<li>${x}</li>`).join("");
+  $("#commitsList").innerHTML  = t("commits").map(x => `<li>${x}</li>`).join("");
+  $("#citiesChips").innerHTML  = t("cities").map(x => `<span class="chip">${x}</span>`).join("");
+  $$("[data-i18n='copyright']").forEach(el => el.textContent = t("copyright") + BIO_DATA.name + " — " + new Date().getFullYear());
+  $$(".lang-btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === l)));
+  $("#appName").textContent = BIO_DATA.name;
+  updateChatChrome(); updateOpenPanels();
+}
+$$(".lang-btn").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+
+function updateOpenPanels(){
+  $$(".acc-btn[aria-expanded='true']").forEach(btn => {
+    const p = document.getElementById(btn.getAttribute("aria-controls"));
+    p.style.maxHeight = p.scrollHeight + "px";
+  });
+}
+$$(".acc-btn").forEach(btn => btn.addEventListener("click", () => {
+  const open = btn.getAttribute("aria-expanded") === "true";
+  const p = document.getElementById(btn.getAttribute("aria-controls"));
+  btn.setAttribute("aria-expanded", String(!open));
+  p.style.maxHeight = open ? "0px" : p.scrollHeight + "px";
+}));
+window.addEventListener("resize", updateOpenPanels);
+
+(function buildCarousel(){
+  const track = $("#carTrack"), dotsBox = $("#carDots");
+  let idx = 0, timer = null;
+  BIO_DATA.images.forEach((src, i) => {
+    track.insertAdjacentHTML("beforeend", `<img src="${src}" alt="${BIO_DATA.name} ${i+1}" loading="${i?"lazy":"eager"}">`);
+    dotsBox.insertAdjacentHTML("beforeend", `<button aria-label="Slide ${i+1}"></button>`);
+  });
+  const dots = $$("#carDots button");
+  const go = i => { idx = (i + BIO_DATA.images.length) % BIO_DATA.images.length;
+    track.style.transform = `translateX(-${idx*100}%)`;
+    dots.forEach((d,j) => d.classList.toggle("on", j === idx)); };
+  const restart = () => { clearInterval(timer); timer = setInterval(() => go(idx+1), 5000); };
+  $("#carPrev").onclick = () => { go(idx-1); restart(); };
+  $("#carNext").onclick = () => { go(idx+1); restart(); };
+  dots.forEach((d,j) => d.addEventListener("click", () => { go(j); restart(); }));
+  let x0 = null;
+  $("#carousel").addEventListener("pointerdown", e => x0 = e.clientX);
+  $("#carousel").addEventListener("pointerup", e => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0;
+    if (Math.abs(dx) > 40){ go(idx + (dx < 0 ? 1 : -1)); restart(); }
+    x0 = null;
+  });
+  go(0); restart();
+})();
+
+$("#gallery").innerHTML = BIO_DATA.gallery.map((src,i) => `<img src="${src}" alt="Inspiration ${i+1}" loading="lazy">`).join("");
+
+(function buildVideo(){
+  const box = $("#videoBox");
+  const poster = BIO_DATA.videoId ? `https://i.ytimg.com/vi/${BIO_DATA.videoId}/hqdefault.jpg`
+    : "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1200&q=70";
+  box.innerHTML = `<img class="thumb" src="${poster}" alt="Video"><span class="vid-title">${BIO_DATA.name}</span>
+    <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>`;
+  box.querySelector(".play-btn").addEventListener("click", () => {
+    if (!BIO_DATA.videoId) return toast("Añade tu ID de video en el panel #admin", "#ef4444");
+    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${BIO_DATA.videoId}?autoplay=1&rel=0" title="YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+  });
+})();
+
+function buildLinks(){
+  $("#btnCall").href = `tel:${BIO_DATA.phone.replace(/\s/g,"")}`;
+  $("#btnWa").href = $("#ctaWa").href = `https://wa.me/${BIO_DATA.whatsapp}?text=${encodeURIComponent("Hola " + BIO_DATA.name + ", me gustaría pedir un presupuesto.")}`;
+  $("#linkWeb").href = BIO_DATA.links.web; $("#linkIg").href = BIO_DATA.links.instagram;
+  $("#linkYt").href = BIO_DATA.links.youtube; $("#linkFb").href = BIO_DATA.links.facebook;
+  $("#linkTt").href = BIO_DATA.links.tiktok;
+  const av = $("#avatar"); av.src = BIO_DATA.avatar;
+  av.onerror = function(){ const ini = BIO_DATA.name.split(" ").map(w=>w[0]).slice(0,2).join("");
+    this.outerHTML = `<div class="avatar-fallback">${ini}</div>`; };
+}
+
+/* Router */
+function route(){
+  const hash = location.hash.replace("#","");
+  if (hash === "admin"){
+    $("#viewBio").classList.remove("active"); $("#viewAdmin").classList.add("active");
+    document.title = "Admin — " + BIO_DATA.name; loadAdminForm();
+  } else {
+    $("#viewAdmin").classList.remove("active"); $("#viewBio").classList.add("active");
+    document.title = BIO_DATA.name + " — Pintor y decorador";
+  }
+}
+window.addEventListener("hashchange", route);
+
+/* Admin */
+function loadAdminForm(){
+  $("#f_name").value = BIO_DATA.name; $("#f_phone").value = BIO_DATA.phone;
+  $("#f_whatsapp").value = BIO_DATA.whatsapp; $("#f_avatar").value = BIO_DATA.avatar;
+  $("#f_videoId").value = BIO_DATA.videoId; $("#f_web").value = BIO_DATA.links.web;
+  $("#f_ig").value = BIO_DATA.links.instagram; $("#f_yt").value = BIO_DATA.links.youtube;
+  $("#f_fb").value = BIO_DATA.links.facebook; $("#f_tt").value = BIO_DATA.links.tiktok;
+  $("#f_images").value = BIO_DATA.images.join("\n"); $("#f_gallery").value = BIO_DATA.gallery.join("\n");
+}
+function collectAdminData(){
+  BIO_DATA.name = $("#f_name").value.trim(); BIO_DATA.phone = $("#f_phone").value.trim();
+  BIO_DATA.whatsapp = $("#f_whatsapp").value.replace(/\D/g,""); BIO_DATA.avatar = $("#f_avatar").value.trim();
+  BIO_DATA.videoId = $("#f_videoId").value.trim();
+  BIO_DATA.links = { web:$("#f_web").value.trim(), instagram:$("#f_ig").value.trim(), youtube:$("#f_yt").value.trim(), facebook:$("#f_fb").value.trim(), tiktok:$("#f_tt").value.trim() };
+  BIO_DATA.images = $("#f_images").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  BIO_DATA.gallery = $("#f_gallery").value.split("\n").map(s=>s.trim()).filter(Boolean);
+}
+$("#adminForm").addEventListener("submit", e => {
+  e.preventDefault(); collectAdminData();
+  localStorage.setItem("bioDraft", JSON.stringify(BIO_DATA));
+  toast("✓ Borrador guardado. Previsualiza o descarga el HTML.", "#10b981");
+});
+$("#btnReset").addEventListener("click", () => {
+  if (confirm("¿Restablecer todos los datos por defecto?")){
+    BIO_DATA = JSON.parse(JSON.stringify(DEFAULT_DATA)); loadAdminForm();
+    toast("✓ Datos restablecidos", "#10b981");
+  }
+});
+$("#backToBio").addEventListener("click", e => { e.preventDefault(); location.hash = ""; });
+document.querySelector(".btn-a.preview").addEventListener("click", e => {
+  e.preventDefault(); collectAdminData();
+  localStorage.setItem("bioDraft", JSON.stringify(BIO_DATA));
+  location.hash = "preview=1";
+});
+$("#btnExport").addEventListener("click", () => {
+  collectAdminData();
+  chatBody.innerHTML = ""; chatQuick.innerHTML = ""; $("#chatModal").hidden = true;
+  const newData = "let BIO_DATA = " + JSON.stringify(BIO_DATA, null, 2) + ";";
+  const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML.replace(/let BIO_DATA = \{[\s\S]*?\};/, newData);
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([html], { type:"text/html;charset=utf-8" }));
+  a.download = "index.html"; a.click(); URL.revokeObjectURL(a.href);
+  toast("✓ HTML descargado. Súbelo a GitHub para publicar.", "#10b981");
+});
+
+/* Init */
+(function init(){
+  const draft = localStorage.getItem("bioDraft");
+  if (draft && (location.hash.includes("preview") || location.hash === "#admin")){
+    try { BIO_DATA = JSON.parse(draft); } catch(e){}
+  }
+  buildLinks(); applyLang(lang); route();
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { threshold:.12 });
+  $$(".reveal").forEach(el => io.observe(el));
+})();
+</script>
 </body>
 </html>
