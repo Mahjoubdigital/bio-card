@@ -41,14 +41,28 @@
     </fieldset>
 
     <div class="actions">
-      <button type="button" class="btn-secondary" id="btnReset">Restablecer por defecto</button>
-      <button type="submit" class="btn-primary">Guardar cambios</button>
-      <a href="index.html" class="btn-preview">Ver página</a>
+      <button type="button" class="btn-secondary" id="btnReset">Restablecer</button>
+      <button type="button" class="btn-export" id="btnExport">⬇ Exportar data.js</button>
+      <button type="submit" class="btn-primary">Guardar borrador</button>
+      <a href="index.html?preview=1" class="btn-preview">Ver cambios</a>
     </div>
   </form>
 
+  <div class="instructions">
+    <h3>📋 Cómo publicar los cambios</h3>
+    <ol>
+      <li>Edita los campos y pulsa <strong>Guardar borrador</strong></li>
+      <li>Haz clic en <strong>Ver cambios</strong> para previsualizar</li>
+      <li>Si todo está bien, pulsa <strong>Exportar data.js</strong></li>
+      <li>Sustituye el archivo <code>data.js</code> en tu repositorio de GitHub</li>
+      <li>Haz <code>git commit</code> y <code>git push</code></li>
+      <li>Vercel redeployará automáticamente ✅</li>
+    </ol>
+  </div>
+
   <div class="toast" id="toast"></div>
 </div>
+<script src="data.js"></script>
 <script src="admin.js"></script>
 </body>
 </html>

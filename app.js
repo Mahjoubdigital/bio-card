@@ -1,4 +1,3 @@
-/* ============ DATOS POR DEFECTO (si no hay en localStorage) ============ */
 const DEFAULT_DATA = {
   name: "Zakaria Hamza",
   phone: "+212600000000",
@@ -26,7 +25,6 @@ const DEFAULT_DATA = {
   ]
 };
 
-/* ============ TRADUCCIONES ============ */
 const I18N = {
   es: {
     tagline: "Pintor y decorador profesional en Casablanca.",
@@ -102,11 +100,15 @@ const I18N = {
   }
 };
 
-/* ============ UTILIDADES ============ */
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 let lang = localStorage.getItem("bioLang") || "es";
-const DATA = JSON.parse(localStorage.getItem("bioData")) || DEFAULT_DATA;
+
+// Prioridad: ?preview=1 usa localStorage (borrador) | si no, data.js público | si no, defecto
+const _preview = new URLSearchParams(location.search).has("preview")
+  ? JSON.parse(localStorage.getItem("bioData") || "null") : null;
+const DATA = _preview || window.BIO_DATA || DEFAULT_DATA;
+
 const t = k => (I18N[lang] && I18N[lang][k]) ?? I18N.es[k] ?? "";
 
 function applyLang(l){
@@ -125,10 +127,8 @@ function applyLang(l){
   updateOpenPanels();
 }
 
-/* ============ IDIOMAS ============ */
 $$(".lang-btn").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
 
-/* ============ ACORDEONES ============ */
 function updateOpenPanels(){
   $$(".acc-btn[aria-expanded='true']").forEach(btn => {
     const p = document.getElementById(btn.getAttribute("aria-controls"));
@@ -145,7 +145,6 @@ $$(".acc-btn").forEach(btn => {
 });
 window.addEventListener("resize", updateOpenPanels);
 
-/* ============ CARRUSEL ============ */
 const track = $("#carTrack"), dotsBox = $("#carDots");
 let idx = 0, timer = null;
 DATA.images.forEach((src, i) => {
@@ -172,10 +171,8 @@ $("#carousel").addEventListener("pointerup", e => {
 });
 go(0); restart();
 
-/* ============ GALERÍA ============ */
 $("#gallery").innerHTML = DATA.gallery.map((src, i) => `<img src="${src}" alt="Inspiration ${i+1}" loading="lazy">`).join("");
 
-/* ============ VIDEO YOUTUBE ============ */
 (function buildVideo(){
   const box = $("#videoBox");
   const poster = DATA.videoId
@@ -195,7 +192,6 @@ $("#gallery").innerHTML = DATA.gallery.map((src, i) => `<img src="${src}" alt="I
   });
 })();
 
-/* ============ ENLACES ============ */
 $("#btnCall").href = `tel:${DATA.phone.replace(/\s/g, "")}`;
 $("#btnWa").href = $("#ctaWa").href = `https://wa.me/${DATA.whatsapp}?text=${encodeURIComponent("Hola " + DATA.name + ", me gustaría pedir un presupuesto.")}`;
 $("#linkWeb").href = DATA.links.web;
@@ -204,7 +200,6 @@ $("#linkYt").href  = DATA.links.youtube;
 $("#linkFb").href  = DATA.links.facebook;
 $("#linkTt").href  = DATA.links.tiktok;
 
-/* ============ MODAL ============ */
 const modal = $("#chatModal");
 $("#btnChat").addEventListener("click", () => { modal.hidden = false; $("#fName").focus(); });
 $("#modalCancel").addEventListener("click", () => modal.hidden = true);
@@ -217,7 +212,6 @@ $("#chatForm").addEventListener("submit", e => {
   modal.hidden = true; e.target.reset(); toast(t("toast_sent"));
 });
 
-/* ============ TOAST ============ */
 let toastTimer;
 function toast(msg){
   const el = $("#toast");
@@ -226,18 +220,15 @@ function toast(msg){
   toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
 }
 
-/* ============ AVATAR ============ */
 $("#avatar").src = DATA.avatar;
 $("#avatar").addEventListener("error", function(){
   const initials = DATA.name.split(" ").map(w => w[0]).slice(0, 2).join("");
   this.outerHTML = `<div class="avatar-fallback">${initials}</div>`;
 });
 
-/* ============ ANIMACIÓN ============ */
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
 }), { threshold: .12 });
 $$(".reveal").forEach(el => io.observe(el));
 
-/* ============ INICIO ============ */
 applyLang(lang);

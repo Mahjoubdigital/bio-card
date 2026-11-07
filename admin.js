@@ -9,7 +9,8 @@ const DEFAULT_DATA = {
   gallery: ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=70","https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=600&q=70","https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=70","https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=600&q=70"]
 };
 
-let DATA = JSON.parse(localStorage.getItem("bioData")) || DEFAULT_DATA;
+// Partir de lo publicado (data.js) si no hay borrador local
+let DATA = JSON.parse(localStorage.getItem("bioData")) || window.BIO_DATA || DEFAULT_DATA;
 
 function loadForm(){
   document.getElementById("f_name").value = DATA.name;
@@ -51,7 +52,7 @@ document.getElementById("adminForm").addEventListener("submit", e => {
   DATA.images = document.getElementById("f_images").value.split("\n").map(s => s.trim()).filter(Boolean);
   DATA.gallery = document.getElementById("f_gallery").value.split("\n").map(s => s.trim()).filter(Boolean);
   localStorage.setItem("bioData", JSON.stringify(DATA));
-  toast("✓ Cambios guardados correctamente");
+  toast("✓ Borrador guardado. Ahora exporta data.js para publicar.");
 });
 
 document.getElementById("btnReset").addEventListener("click", () => {
@@ -61,6 +62,17 @@ document.getElementById("btnReset").addEventListener("click", () => {
     loadForm();
     toast("✓ Datos restablecidos", true);
   }
+});
+
+document.getElementById("btnExport").addEventListener("click", () => {
+  const content = "// Generado desde admin.html — " + new Date().toLocaleString() +
+    "\nwindow.BIO_DATA = " + JSON.stringify(DATA, null, 2) + ";\n";
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([content], { type: "text/javascript" }));
+  a.download = "data.js";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("✓ data.js descargado. Súbelo a GitHub para publicar.");
 });
 
 loadForm();
